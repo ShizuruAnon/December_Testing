@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- DETAILED BASIC CONFIGURATION ----- */
+	/* ----- DETAILED BASIC CONFIGURATION ----- */
 
 var advertisements = [
 	"আৡঊসঠচঈ1",
@@ -48,36 +48,36 @@ var TopUserLogo = [
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- END OF CONFIGURATION, DO NOT CHANGE ANYTHING BELOW ----- */
+	/* ----- END OF CONFIGURATION, DO NOT CHANGE ANYTHING BELOW ----- */
 
 /* ----- Initial channel options ----- */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- POLYFILLS ------ */
+	/* ----- POLYFILLS ------ */
 (function() {
-  var lastTime = 0;
-  var vendors = ['ms', 'moz', 'webkit', 'o'];
-  for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                                 || window[vendors[x]+'CancelRequestAnimationFrame'];
-  }
+	var lastTime = 0;
+	var vendors = ['ms', 'moz', 'webkit', 'o'];
+	for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+		window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+			|| window[vendors[x]+'CancelRequestAnimationFrame'];
+	}
 
-  if (!window.requestAnimationFrame)
-      window.requestAnimationFrame = function(callback, element) {
-          var currTime = new Date().getTime();
-          var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-          var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-            timeToCall);
-          lastTime = currTime + timeToCall;
-          return id;
-      };
+	if (!window.requestAnimationFrame)
+		window.requestAnimationFrame = function(callback, element) {
+			var currTime = new Date().getTime();
+			var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+			var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+				timeToCall);
+			lastTime = currTime + timeToCall;
+			return id;
+		};
 
-  if (!window.cancelAnimationFrame)
-      window.cancelAnimationFrame = function(id) {
-          clearTimeout(id);
-      };
+	if (!window.cancelAnimationFrame)
+		window.cancelAnimationFrame = function(id) {
+			clearTimeout(id);
+		};
 }());
 
 /* ----- getting channel options ----- */
@@ -132,21 +132,21 @@ var NICO_NICO_MESSAGE_QUEUE_TIME = getOrDefault(CHANNEL.name + "_NICO_NICO_MESSA
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- Global functions ----- */
+	/* ----- Global functions ----- */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-(function trimChatBuffer() {
-	var maxSize = window.CHATMAXSIZE;
-	if (!maxSize || typeof maxSize !== "number")
-		maxSize = parseInt(maxSize || 100, 10) || 100;
-	var buffer = document.getElementById("messagebuffer");
-	var count = ($("#messagebuffer.linewrap div:visible").length - 1) - maxSize;
+	(function trimChatBuffer() {
+		var maxSize = window.CHATMAXSIZE;
+		if (!maxSize || typeof maxSize !== "number")
+			maxSize = parseInt(maxSize || 100, 10) || 100;
+		var buffer = document.getElementById("messagebuffer");
+		var count = ($("#messagebuffer.linewrap div:visible").length - 1) - maxSize;
 
-	for (var i = 0; i < count; i++) {
-		buffer.firstChild.remove();
-	}
-})();
+		for (var i = 0; i < count; i++) {
+			buffer.firstChild.remove();
+		}
+	})();
 
 // toggle elements visibility
 function toggleDiv(a) {
@@ -336,50 +336,50 @@ function setMode(a) {
 
 	switch (a) {
 		case "syMode":
-		$("#videowrap, #videowrap p, #videowrap div, #chatwrap, #rightpane").show();
-		$("#config-btn, #configbtnwrap br").show();
-		$("#min-layout").parent().show();
-		normalPlayer();
-		normalChat();
-		playerLocation(UCONF.player);
-		handleWindowResize();
-		break;
+			$("#videowrap, #videowrap p, #videowrap div, #chatwrap, #rightpane").show();
+			$("#config-btn, #configbtnwrap br").show();
+			$("#min-layout").parent().show();
+			normalPlayer();
+			normalChat();
+			playerLocation(UCONF.player);
+			handleWindowResize();
+			break;
 
 		case "kMode":
-		$("#videowrap").show();
-		bigPlayer();
-		$("#fontspanel, #emotespanel").hide();
-		break;
+			$("#videowrap").show();
+			bigPlayer();
+			$("#fontspanel, #emotespanel").hide();
+			break;
 
 		case "chMode":
-		$("#chatwrap").show();
-		if (WEBKIT) {
-			$("#videowrap").hide();
-		} else {
-			$("#videowrap div, #videowrap p").hide();
-			$("#ytapiplayer").width(1).height(1);
-		}
-		bigChat();
-		break;
+			$("#chatwrap").show();
+			if (WEBKIT) {
+				$("#videowrap").hide();
+			} else {
+				$("#videowrap div, #videowrap p").hide();
+				$("#ytapiplayer").width(1).height(1);
+			}
+			bigChat();
+			break;
 
 		case "sMode":
-		$("#chatwrap").show();
-		$("#videowrap").hide();
-		$("#ytapiplayer").remove();
-		bigChat();
-		modesel.find("option[value='chMode'], option[value='rMode']").hide();
-		$("#fontspanel, #emotespanel").hide();
-		NOPLAYER = true;
-		break;
+			$("#chatwrap").show();
+			$("#videowrap").hide();
+			$("#ytapiplayer").remove();
+			bigChat();
+			modesel.find("option[value='chMode'], option[value='rMode']").hide();
+			$("#fontspanel, #emotespanel").hide();
+			NOPLAYER = true;
+			break;
 
 		case "rMode":
-		if (WEBKIT) {
-			$("#main").hide();
-		} else {
-			$("#videowrap div, #videowrap p").hide();
-			$("#ytapiplayer").width(1).height(1);
-		}
-		break;
+			if (WEBKIT) {
+				$("#main").hide();
+			} else {
+				$("#videowrap div, #videowrap p").hide();
+				$("#ytapiplayer").width(1).height(1);
+			}
+			break;
 	}
 }
 
@@ -435,15 +435,15 @@ fixUserlistHover();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- UI events functions ----- */
+	/* ----- UI events functions ----- */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// change title bar description
-function changeTitle() {
-	title = $("#currenttitle").text();
-	$("#currenttitle").text(title.replace(/^Currently Playing:/, TitleBarDescription_Caption));
-}
+	// change title bar description
+	function changeTitle() {
+		title = $("#currenttitle").text();
+		$("#currenttitle").text(title.replace(/^Currently Playing:/, TitleBarDescription_Caption));
+	}
 
 // expand/collapse queue
 function expandQueue() {
@@ -761,12 +761,12 @@ function toggleMinLayout() {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- User Interface ----- */
+	/* ----- User Interface ----- */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// adding important hidden reference row
-zerorow = $('<div id="zerorow" class="row" />').insertBefore("#motdrow");
+	// adding important hidden reference row
+	zerorow = $('<div id="zerorow" class="row" />').insertBefore("#motdrow");
 
 // adding top logo row
 azukirow = $('<div id="azukirow" class="row" />').insertBefore(zerorow);
@@ -942,7 +942,7 @@ function makeChatPanel() {
 			} else {
 				alert("Invalid input. Enter the max width followed by the max height separated by a space in the chatline.\nEx. \"400 200\"");
 			}
-	});
+		});
 	_chatBuffer = addChatMessage;
 	addChatMessage = function(data) {
 		_chatBuffer(data);
@@ -1049,7 +1049,7 @@ quality = $('<div id="quality" class="btn btn-sm btn-default" title="Change the 
 	});
 qmenu = $('<ul id="qualitymenu" class="dropdown-menu" />')
 	.appendTo(quality);
-	qmitems = [["Auto","auto"],["240p","240"],["360p","360"],["480p","480"],["720p","720"],["1080p","1080"],["Best","best"]];
+qmitems = [["Auto","auto"],["240p","240"],["360p","360"],["480p","480"],["720p","720"],["1080p","1080"],["Best","best"]];
 for (i in qmitems) {
 	$('<li class="header-drop-link" title="' + qmitems[i][1] + '">' + qmitems[i][0] + '</li>')
 		.appendTo(qmenu)
@@ -1211,7 +1211,7 @@ hidemotdbtn = $('<button id="hidemotd-btn" class="btn btn-sm btn-default" title=
 		toggleDiv("#motdrow");
 		HIDEMOTD ? hidemotdbtn.addClass('btn-danger') : hidemotdbtn.removeClass('btn-danger');
 		HIDEMOTD ? hidemotdbtn.attr("title","Show MOTD") : hidemotdbtn.attr("title","Hide MOTD");
-});
+	});
 
 hideannbtn = $('<button id="hideann-btn" class="btn btn-sm btn-default" title="Hide Announcements">Ann</button>')
 	.appendTo(hidewrap)
@@ -1221,7 +1221,7 @@ hideannbtn = $('<button id="hideann-btn" class="btn btn-sm btn-default" title="H
 		toggleDiv("#announcements");
 		HIDEANN ? hideannbtn.addClass('btn-danger') : hideannbtn.removeClass('btn-danger');
 		HIDEANN ? hideannbtn.attr("title","Show Announcements") : hideannbtn.attr("title","Hide Announcements");
-});
+	});
 
 hideplbtn = $('<button id="hidepl-btn" class="btn btn-sm btn-default" title="Hide Playlist">PL</button>')
 	.appendTo(hidewrap)
@@ -1232,7 +1232,7 @@ hideplbtn = $('<button id="hidepl-btn" class="btn btn-sm btn-default" title="Hid
 		toggleDiv("#plmeta");
 		HIDEPL ? hideplbtn.addClass('btn-danger') : hideplbtn.removeClass('btn-danger');
 		HIDEPL ? hideplbtn.attr("title","Show Playlist") : hideplbtn.attr("title","Hide Playlist");
-});
+	});
 
 hidehfbtn = $('<button id="hidehf-btn" class="btn btn-sm btn-default" title="Hide Header and Footer">H/F</button>')
 	.appendTo(hidewrap)
@@ -1244,7 +1244,7 @@ hidehfbtn = $('<button id="hidehf-btn" class="btn btn-sm btn-default" title="Hid
 		toggleDiv("footer");
 		HIDEHF ? hidehfbtn.addClass('btn-danger') : hidehfbtn.removeClass('btn-danger');
 		HIDEPL ? hidehfbtn.attr("title","Show Header and Footer") : hidehfbtn.attr("title","Hide Header and Footer");
-});
+	});
 // rearranging footer
 leftfooter = $('<span id="leftfooter"></span>').appendTo("footer .container");
 
@@ -1260,18 +1260,18 @@ setInterval(onlineTime, 60000);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* ----- Chat and window extensions and events ----- */
+	/* ----- Chat and window extensions and events ----- */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$("#cs-motdtext").on("keydown", function(ev) {
-	if (ev.which == 83 && ev.ctrlKey && !ev.shiftKey && !ev.altKey) {
-		socket.emit("setMotd", {
-			motd: $("#cs-motdtext").val()
-		});
-		return false;
-	}
-});
+	$("#cs-motdtext").on("keydown", function(ev) {
+		if (ev.which == 83 && ev.ctrlKey && !ev.shiftKey && !ev.altKey) {
+			socket.emit("setMotd", {
+				motd: $("#cs-motdtext").val()
+			});
+			return false;
+		}
+	});
 
 $("#cs-csstext").on("keydown", function(ev) {
 	if (ev.which == 83 && ev.ctrlKey && !ev.shiftKey && !ev.altKey) {
@@ -1332,8 +1332,8 @@ $(window).resize(function() {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// setting global sockets
-socket.on("channelOpts", setUserCSS);
+	// setting global sockets
+	socket.on("channelOpts", setUserCSS);
 socket.on("channelCSSJS", setUserCSS);
 var q240480 = $('li[title="240"],li[title="480"]');
 socket.on("mediaUpdate", function() {
@@ -1448,7 +1448,7 @@ currenttimebtn = $('<button id="findtime" class="btn btn-xs btn-default" title="
 		} else {
 			socket.on("mediaUpdate", currentVideoTime);
 		}
-});
+	});
 
 socket.on("usercount", function(data) {
 	if (MAXUSERS < data) {
@@ -1460,13 +1460,13 @@ $('<span id="maxusers" title="Maximum Autists">' + MAXUSERS + ' max autists</spa
 	.appendTo("#chatheader")
 
 Callbacks.usercount = function(count) {
-        CHANNEL.usercount = count;
-        var text = count + " autist";
-        if(count != 1) {
-            text += "s";
-        }
-        $("#usercount").text(text);
-    }
+	CHANNEL.usercount = count;
+	var text = count + " autist";
+	if(count != 1) {
+		text += "s";
+	}
+	$("#usercount").text(text);
+}
 Callbacks.usercount(CHANNEL.usercount);
 
 setInterval(function() {
@@ -1544,7 +1544,7 @@ showprofbtn = $('<span id="showprof-btn" class="label label-default pull-right p
 	.on("click", function() {
 		SHOWPROF = !SHOWPROF;
 		setOpt(CHANNEL.name + "_SHOWPROF", SHOWPROF);
-	  	if (SHOWPROF) {
+		if (SHOWPROF) {
 			showProfiles();
 			showprofbtn.addClass('btn-success');
 			showprofbtn.attr("title", "Show Profile Pictures");
@@ -1553,9 +1553,9 @@ showprofbtn = $('<span id="showprof-btn" class="label label-default pull-right p
 				removeProfile($(this))
 			});
 			showprofbtn.removeClass('btn-success');
-	 		showprofbtn.attr("title", "Hide Profile Pictures");
+			showprofbtn.attr("title", "Hide Profile Pictures");
 		}
-});
+	});
 if (SHOWPROF) {
 	showprofbtn.addClass('btn-success');
 	showProfiles();
@@ -1576,7 +1576,7 @@ $(document).keydown(function(event) {
 			tag.braced = true;
 			break;
 		default: return true;
-		}
+	}
 
 	// -- Grab targets complete contents and selection start and end
 	var text  = $(event.target).val();
@@ -1615,12 +1615,12 @@ var playerparent = document.getElementsByClassName("embed-responsive-16by9")[0];
 var playerwrap = document.getElementById("videowrap");
 
 function getNicoPlayerDimensions() {
-  var NICOW = playerparent.offsetWidth;
-  return {
-    NICOH: playerwrap.offsetHeight * 3 / 4,
-    NICOW: NICOW,
-    NICOS: NICOW * .2
-  };
+	var NICOW = playerparent.offsetWidth;
+	return {
+		NICOH: playerwrap.offsetHeight * 3 / 4,
+		NICOW: NICOW,
+		NICOS: NICOW * .2
+	};
 }
 
 nicobtn = $('<button id="nicobtn" class="btn btn-sm ' + (!NICORIPOFF ? 'btn-danger' : 'btn-success') + '" title="Lel penis xd">Nico Nico Nii~</button>')
@@ -1647,16 +1647,16 @@ if (NICORIPOFF) {
 // Flush messages to the screen every 100ms
 var nicoNicoMessageDataQueue = [];
 function addNicoNicoMessageDataToQueue(data) {
-  nicoNicoMessageDataQueue.push(data);
+	nicoNicoMessageDataQueue.push(data);
 }
 
 function handleNicoNicoMessageDataQueue() {
-  if (nicoNicoMessageDataQueue.length > 0) {
-    nicoChineseRipOff(nicoNicoMessageDataQueue);
-    nicoNicoMessageDataQueue = [];
-  }
+	if (nicoNicoMessageDataQueue.length > 0) {
+		nicoChineseRipOff(nicoNicoMessageDataQueue);
+		nicoNicoMessageDataQueue = [];
+	}
 
-  setTimeout(handleNicoNicoMessageDataQueue, NICO_NICO_MESSAGE_QUEUE_TIME);
+	setTimeout(handleNicoNicoMessageDataQueue, NICO_NICO_MESSAGE_QUEUE_TIME);
 }
 handleNicoNicoMessageDataQueue();
 
@@ -1667,320 +1667,320 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // BEGIN OBTO EDIT
 
 var NicoNicoComment = function () {
-  function NicoNicoComment(commentContainerElement) {
-    _classCallCheck(this, NicoNicoComment);
+	function NicoNicoComment(commentContainerElement) {
+		_classCallCheck(this, NicoNicoComment);
 
-    this._commentContainerElement = commentContainerElement;
-    this._boundAnimationEndHandler = this._handleAnimationEnd.bind(this);
-    this._isActive = false;
-    this._activateTimeout = undefined;
-    this._animationTimeout = undefined;
-    this._lastActive = Date.now();
+		this._commentContainerElement = commentContainerElement;
+		this._boundAnimationEndHandler = this._handleAnimationEnd.bind(this);
+		this._isActive = false;
+		this._activateTimeout = undefined;
+		this._animationTimeout = undefined;
+		this._lastActive = Date.now();
 
-    this._initDomElement();
-  }
+		this._initDomElement();
+	}
 
-  _createClass(NicoNicoComment, [{
-    key: 'activate',
-    value: function activate(message, className, cssText) {
-      var _this = this;
-      var contains_image = message.indexOf("<img ") > -1;
+	_createClass(NicoNicoComment, [{
+		key: 'activate',
+		value: function activate(message, className, cssText) {
+			var _this = this;
+			var contains_image = message.indexOf("<img ") > -1;
 
-      if (!this.domElement) {
-        this._initDomElement();
-      }
+			if (!this.domElement) {
+				this._initDomElement();
+			}
 
-      if (this._activateTimeout) {
-        clearTimeout(this._activateTimeout);
-        this._activateTimeout = undefined;
-      }
+			if (this._activateTimeout) {
+				clearTimeout(this._activateTimeout);
+				this._activateTimeout = undefined;
+			}
 
-      // Trigger next frame to ensure the animation plays again
-      this.reset();
-      this._activateTimeout = setTimeout(function () {
-        _this.domElement.innerHTML = '<span>' + message + '</span>';
-        _this.domElement.className = className;
-        _this.domElement.style.cssText = cssText;
-        _this._isActive = true;
+			// Trigger next frame to ensure the animation plays again
+			this.reset();
+			this._activateTimeout = setTimeout(function () {
+				_this.domElement.innerHTML = '<span>' + message + '</span>';
+				_this.domElement.className = className;
+				_this.domElement.style.cssText = cssText;
+				_this._isActive = true;
 
-        var nicoDimensions = getNicoPlayerDimensions();
-        var imgpx = 0;
-        if (contains_image) {
-          imgpx = nicoDimensions.NICOW * .55;
-        }
+				var nicoDimensions = getNicoPlayerDimensions();
+				var imgpx = 0;
+				if (contains_image) {
+					imgpx = nicoDimensions.NICOW * .55;
+				}
 
-        // Manually calculate animation time
-        var timeout = (nicoDimensions.NICOW + _this.domElement.firstChild.offsetWidth + imgpx) / nicoDimensions.NICOS * 1000;
-        _this._animationTimeout = setTimeout(function() {
-          _this.reset();
-        }, timeout);
-      }, 0);
-    }
-  }, {
-    key: 'reset',
-    value: function reset() {
-      if (!this._isActive || !this.domElement) {
-        return;
-      }
+				// Manually calculate animation time
+				var timeout = (nicoDimensions.NICOW + _this.domElement.firstChild.offsetWidth + imgpx) / nicoDimensions.NICOS * 1000;
+				_this._animationTimeout = setTimeout(function() {
+					_this.reset();
+				}, timeout);
+			}, 0);
+		}
+	}, {
+		key: 'reset',
+		value: function reset() {
+			if (!this._isActive || !this.domElement) {
+				return;
+			}
 
-      this.domElement.innerHTML = '';
-      this.domElement.className = '';
-      this.domElement.style.cssText = '';
-      this._isActive = false;
-      this._lastActive = Date.now();
-    }
-  }, {
-    key: 'cleanup',
-    value: function cleanup() {
-      this._removeListeners();
-      this._commentContainerElement.removeChild(this.domElement);
-    }
-  }, {
-    key: 'isActive',
-    value: function isActive() {
-      return this._isActive;
-    }
-  }, {
-    key: 'getLastActiveTime',
-    value: function getLastActiveTime() {
-      if (this._isActive) {
-        return Date.now();
-      }
+			this.domElement.innerHTML = '';
+			this.domElement.className = '';
+			this.domElement.style.cssText = '';
+			this._isActive = false;
+			this._lastActive = Date.now();
+		}
+	}, {
+		key: 'cleanup',
+		value: function cleanup() {
+			this._removeListeners();
+			this._commentContainerElement.removeChild(this.domElement);
+		}
+	}, {
+		key: 'isActive',
+		value: function isActive() {
+			return this._isActive;
+		}
+	}, {
+		key: 'getLastActiveTime',
+		value: function getLastActiveTime() {
+			if (this._isActive) {
+				return Date.now();
+			}
 
-      return this._lastActive;
-    }
-  }, {
-    key: '_handleAnimationEnd',
-    value: function _handleAnimationEnd() {
-      this.reset();
-    }
-  }, {
-    key: '_initDomElement',
-    value: function _initDomElement() {
-      if (this.domElement) {
-        return;
-      }
+			return this._lastActive;
+		}
+	}, {
+		key: '_handleAnimationEnd',
+		value: function _handleAnimationEnd() {
+			this.reset();
+		}
+	}, {
+		key: '_initDomElement',
+		value: function _initDomElement() {
+			if (this.domElement) {
+				return;
+			}
 
-      this._removeListeners();
-      this.domElement = document.createElement('div');
-      this._commentContainerElement.appendChild(this.domElement);
-      this._addListeners();
-    }
-  }, {
-    key: '_addListeners',
-    value: function _addListeners() {
-      if (!this.domElement) {
-        return;
-      }
+			this._removeListeners();
+			this.domElement = document.createElement('div');
+			this._commentContainerElement.appendChild(this.domElement);
+			this._addListeners();
+		}
+	}, {
+		key: '_addListeners',
+		value: function _addListeners() {
+			if (!this.domElement) {
+				return;
+			}
 
-      this.domElement.addEventListener(NicoNicoComment.ANIMATION_END_EVENT, this._boundAnimationEndHandler);
-    }
-  }, {
-    key: '_removeListeners',
-    value: function _removeListeners() {
-      if (this._animationTimeout) {
-        clearTimeout(this._animationTimeout);
-        this._animationTimeout = undefined;
-      }
+			this.domElement.addEventListener(NicoNicoComment.ANIMATION_END_EVENT, this._boundAnimationEndHandler);
+		}
+	}, {
+		key: '_removeListeners',
+		value: function _removeListeners() {
+			if (this._animationTimeout) {
+				clearTimeout(this._animationTimeout);
+				this._animationTimeout = undefined;
+			}
 
-      if (!this.domElement) {
-        return;
-      }
+			if (!this.domElement) {
+				return;
+			}
 
-      this.domElement.removeEventListener(NicoNicoComment.ANIMATION_END_EVENT, this._boundAnimationEndHandler);
-    }
-  }]);
+			this.domElement.removeEventListener(NicoNicoComment.ANIMATION_END_EVENT, this._boundAnimationEndHandler);
+		}
+	}]);
 
-  return NicoNicoComment;
+	return NicoNicoComment;
 }();
 
 NicoNicoComment.ANIMATION_END_EVENT = function () {
-  var element = document.createElement('fakeelement');
-  var transitions = {
-    "animation": "animationend",
-    "OAnimation": "oAnimationEnd",
-    "MozAnimation": "animationend",
-    "WebkitAnimation": "webkitAnimationEnd"
-  };
+	var element = document.createElement('fakeelement');
+	var transitions = {
+		"animation": "animationend",
+		"OAnimation": "oAnimationEnd",
+		"MozAnimation": "animationend",
+		"WebkitAnimation": "webkitAnimationEnd"
+	};
 
-  for (var t in transitions) {
-    if (element.style[t] !== undefined) {
-      return transitions[t];
-    }
-  }
+	for (var t in transitions) {
+		if (element.style[t] !== undefined) {
+			return transitions[t];
+		}
+	}
 }();
 
 var NicoNicoCommentManager = function () {
-  function NicoNicoCommentManager(commentContainerElement) {
-    _classCallCheck(this, NicoNicoCommentManager);
+	function NicoNicoCommentManager(commentContainerElement) {
+		_classCallCheck(this, NicoNicoCommentManager);
 
-    this._commentContainerElement = commentContainerElement;
-    this._comments = [];
-    for (var i = 0; i < NicoNicoCommentManager.MINIMUM_COMMENTS_ALLOCATED; i++) {
-      this._comments.push(new NicoNicoComment(this._commentContainerElement));
-    }
+		this._commentContainerElement = commentContainerElement;
+		this._comments = [];
+		for (var i = 0; i < NicoNicoCommentManager.MINIMUM_COMMENTS_ALLOCATED; i++) {
+			this._comments.push(new NicoNicoComment(this._commentContainerElement));
+		}
 
-    this._cleanupUnusedCommentsTimeout();
-  }
+		this._cleanupUnusedCommentsTimeout();
+	}
 
-  _createClass(NicoNicoCommentManager, [{
-    key: 'cleanup',
-    value: function cleanup() {
-      for (var i = 0; i < this._comments; i++) {
-        var comment = this._comments[i];
-        comment.cleanup();
-      }
-      this._comments = [];
+	_createClass(NicoNicoCommentManager, [{
+		key: 'cleanup',
+		value: function cleanup() {
+			for (var i = 0; i < this._comments; i++) {
+				var comment = this._comments[i];
+				comment.cleanup();
+			}
+			this._comments = [];
 
-      if (this._cleanupTimeout) {
-        clearTimeout(this._cleanupTimeout);
-        this._cleanupTimeout = undefined;
-      }
-    }
-  }, {
-    key: 'addComments',
-    value: function addComments(messageConfigArr) {
-      var messageIndex = 0;
-      for (var i = 0; i < this._comments.length && messageIndex < messageConfigArr.length; i++) {
-        var comment = this._comments[i];
-        if (comment.isActive()) {
-          continue;
-        }
+			if (this._cleanupTimeout) {
+				clearTimeout(this._cleanupTimeout);
+				this._cleanupTimeout = undefined;
+			}
+		}
+	}, {
+		key: 'addComments',
+		value: function addComments(messageConfigArr) {
+			var messageIndex = 0;
+			for (var i = 0; i < this._comments.length && messageIndex < messageConfigArr.length; i++) {
+				var comment = this._comments[i];
+				if (comment.isActive()) {
+					continue;
+				}
 
-        var config = messageConfigArr[messageIndex];
-        comment.activate(config.message, config.className, config.cssText);
-        messageIndex++;
-      }
+				var config = messageConfigArr[messageIndex];
+				comment.activate(config.message, config.className, config.cssText);
+				messageIndex++;
+			}
 
-      // Add any remaining messages by creating more comments
-      for (; messageIndex < messageConfigArr.length; messageIndex++) {
-        var config = messageConfigArr[messageIndex];
-        var comment = new NicoNicoComment(this._commentContainerElement);
-        comment.activate(config.message, config.className, config.cssText);
-        this._comments.push(comment);
-      }
-    }
-  }, {
-    key: '_cleanupUnusedCommentsTimeout',
-    value: function _cleanupUnusedCommentsTimeout() {
-      var _this2 = this;
+			// Add any remaining messages by creating more comments
+			for (; messageIndex < messageConfigArr.length; messageIndex++) {
+				var config = messageConfigArr[messageIndex];
+				var comment = new NicoNicoComment(this._commentContainerElement);
+				comment.activate(config.message, config.className, config.cssText);
+				this._comments.push(comment);
+			}
+		}
+	}, {
+		key: '_cleanupUnusedCommentsTimeout',
+		value: function _cleanupUnusedCommentsTimeout() {
+			var _this2 = this;
 
-      this._cleanupUnusedComments();
-      this._cleanupTimeout = setTimeout(function () {
-        _this2._cleanupUnusedCommentsTimeout();
-      }, NicoNicoCommentManager.TARGET_EVICTION_TIME_MS);
-    }
-  }, {
-    key: '_cleanupUnusedComments',
-    value: function _cleanupUnusedComments() {
-      var currentTime = Date.now();
-      for (var i = NicoNicoCommentManager.MINIMUM_COMMENTS_ALLOCATED; i < this._comments.length; i++) {
-        var comment = this._comments[i];
-        if (currentTime - comment.getLastActiveTime() >= NicoNicoCommentManager.TARGET_EVICTION_TIME_MS) {
-          // Mark for deletion
-          comment.cleanup();
-          this._comments[i] = null;
-        }
-      }
+			this._cleanupUnusedComments();
+			this._cleanupTimeout = setTimeout(function () {
+				_this2._cleanupUnusedCommentsTimeout();
+			}, NicoNicoCommentManager.TARGET_EVICTION_TIME_MS);
+		}
+	}, {
+		key: '_cleanupUnusedComments',
+		value: function _cleanupUnusedComments() {
+			var currentTime = Date.now();
+			for (var i = NicoNicoCommentManager.MINIMUM_COMMENTS_ALLOCATED; i < this._comments.length; i++) {
+				var comment = this._comments[i];
+				if (currentTime - comment.getLastActiveTime() >= NicoNicoCommentManager.TARGET_EVICTION_TIME_MS) {
+					// Mark for deletion
+					comment.cleanup();
+					this._comments[i] = null;
+				}
+			}
 
-      this._comments = this._comments.filter(function (a) {
-        return !!a;
-      });
-    }
-  }]);
+			this._comments = this._comments.filter(function (a) {
+				return !!a;
+			});
+		}
+	}]);
 
-  return NicoNicoCommentManager;
+	return NicoNicoCommentManager;
 }();
 NicoNicoCommentManager.MINIMUM_COMMENTS_ALLOCATED = 50;
 NicoNicoCommentManager.TARGET_EVICTION_TIME_MS = 2 * 1000;
 
 var nicoNicoCommentManager;
 function nicoChineseRipOff(dataArray) {
-  if (!NICORIPOFF) {
-    return;
-  }
+	if (!NICORIPOFF) {
+		return;
+	}
 
-  // Filter out bad messages
-  dataArray = dataArray.filter(function(data) {
-    SHADOWED = data.username === CLIENT.name && data.meta.shadow ? true : false;
-    if (data.username === "[server]" || data.meta.shadow && !SHADOWED) {
-      return false;
-    }
+	// Filter out bad messages
+	dataArray = dataArray.filter(function(data) {
+		SHADOWED = data.username === CLIENT.name && data.meta.shadow ? true : false;
+		if (data.username === "[server]" || data.meta.shadow && !SHADOWED) {
+			return false;
+		}
 
-    return true;
-  });
+		return true;
+	});
 
-  if (dataArray.length <= 0) {
-    return;
-  }
+	if (dataArray.length <= 0) {
+		return;
+	}
 
-  if (!nicoNicoCommentManager) {
-    nicoNicoCommentManager = new NicoNicoCommentManager(playerparent);
-  }
+	if (!nicoNicoCommentManager) {
+		nicoNicoCommentManager = new NicoNicoCommentManager(playerparent);
+	}
 
-  var nicoDimensions = getNicoPlayerDimensions();
-  var builtComments = [];
-  var bundledCommentHtmlArray = [];
-  var bundledCommentMarginTop = 0;
-  function flushBundledComment() {
-    builtComments.push({
-      message: bundledCommentHtmlArray.join(''),
-      className: 'text-marquee',
-      cssText: 'top: ' + bundledCommentMarginTop + 'px;'
-    });
-    bundledCommentHtmlArray = [];
-  }
+	var nicoDimensions = getNicoPlayerDimensions();
+	var builtComments = [];
+	var bundledCommentHtmlArray = [];
+	var bundledCommentMarginTop = 0;
+	function flushBundledComment() {
+		builtComments.push({
+			message: bundledCommentHtmlArray.join(''),
+			className: 'text-marquee',
+			cssText: 'top: ' + bundledCommentMarginTop + 'px;'
+		});
+		bundledCommentHtmlArray = [];
+	}
 
-  for (var i = 0; i < dataArray.length; i++) {
-    var data = dataArray[i];
+	for (var i = 0; i < dataArray.length; i++) {
+		var data = dataArray[i];
 
-    var className = "";
-    if (data.meta.addClass === "shout") {
-      className += " shout";
-    }
+		var className = "";
+		if (data.meta.addClass === "shout") {
+			className += " shout";
+		}
 
-    var is_image = data.msg.indexOf("<img ") > -1;
-    if (!is_image && bundledCommentHtmlArray.length === 0) {
-      // Margin is only needed for the first div
-      bundledCommentMarginTop = marqueeOffset;
-    }
+		var is_image = data.msg.indexOf("<img ") > -1;
+		if (!is_image && bundledCommentHtmlArray.length === 0) {
+			// Margin is only needed for the first div
+			bundledCommentMarginTop = marqueeOffset;
+		}
 
-    if (is_image) {
-      // Don't add images to the bundled comment html
-      builtComments.push({
-        message: data.msg,
-        className: 'text-marquee ' + className,
-        cssText: 'top: ' + (nicoDimensions.NICOH / 5) + 'px;'
-      });
-    } else {
-      bundledCommentHtmlArray.push(
-          '<span class="' + className + '">' +
-            data.msg +
-            '<br>' +
-          '</span>');
-    }
+		if (is_image) {
+			// Don't add images to the bundled comment html
+			builtComments.push({
+				message: data.msg,
+				className: 'text-marquee ' + className,
+				cssText: 'top: ' + (nicoDimensions.NICOH / 5) + 'px;'
+			});
+		} else {
+			bundledCommentHtmlArray.push(
+				'<span class="' + className + '">' +
+				data.msg +
+				'<br>' +
+				'</span>');
+		}
 
-    marqueeOffset += marqueeheight;
-    if (marqueeOffset > nicoDimensions.NICOH) {
-      // Push the built element
-      flushBundledComment();
-      bundledCommentHtmlArray = [];
-      marqueeOffset = 0;
-    }
-  }
+		marqueeOffset += marqueeheight;
+		if (marqueeOffset > nicoDimensions.NICOH) {
+			// Push the built element
+			flushBundledComment();
+			bundledCommentHtmlArray = [];
+			marqueeOffset = 0;
+		}
+	}
 
-  // Add the remaining bundled comment
-  if (bundledCommentHtmlArray.length > 0) {
-    flushBundledComment();
-  }
-  nicoNicoCommentManager.addComments(builtComments);
+	// Add the remaining bundled comment
+	if (bundledCommentHtmlArray.length > 0) {
+		flushBundledComment();
+	}
+	nicoNicoCommentManager.addComments(builtComments);
 }
 
 function removeNicoText() {
-  if (nicoNicoCommentManager) {
-    nicoNicoCommentManager.cleanup();
-    nicoNicoCommentManager = undefined;
-  }
+	if (nicoNicoCommentManager) {
+		nicoNicoCommentManager.cleanup();
+		nicoNicoCommentManager = undefined;
+	}
 }
 
 // END OBTO EDIT
@@ -1994,29 +1994,29 @@ function updateMOTDCountdown() {
 
 var xmlHttp;
 function srvTime(){
-    try {
-        //FF, Opera, Safari, Chrome
-        xmlHttp = new XMLHttpRequest();
-    }
-    catch (err1) {
-        //IE
-        try {
-            xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
-        }
-        catch (err2) {
-            try {
-                xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
-            }
-            catch (eerr3) {
-                //AJAX not supported, use CPU time.
-                alert("AJAX not supported");
-            }
-        }
-    }
-    xmlHttp.open('HEAD',window.location.href.toString(),false);
-    xmlHttp.setRequestHeader("Content-Type", "text/html");
-    xmlHttp.send('');
-    return xmlHttp.getResponseHeader("Date");
+	try {
+		//FF, Opera, Safari, Chrome
+		xmlHttp = new XMLHttpRequest();
+	}
+	catch (err1) {
+		//IE
+		try {
+			xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+		}
+		catch (err2) {
+			try {
+				xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			catch (eerr3) {
+				//AJAX not supported, use CPU time.
+				alert("AJAX not supported");
+			}
+		}
+	}
+	xmlHttp.open('HEAD',window.location.href.toString(),false);
+	xmlHttp.setRequestHeader("Content-Type", "text/html");
+	xmlHttp.send('');
+	return xmlHttp.getResponseHeader("Date");
 }
 
 var st = srvTime();
@@ -2138,14 +2138,14 @@ function formatChatMessage(data, last) {
 	}
 	prevLength = data.msg.length;
 
-    // Backwards compat
-    if (!data.meta || data.msgclass) {
-        data.meta = {
-            addClass: data.msgclass,
-            // And the award for "variable name most like Java source code" goes to...
-            addClassToNameAndTimestamp: data.msgclass
-        };
-    }
+	// Backwards compat
+	if (!data.meta || data.msgclass) {
+		data.meta = {
+			addClass: data.msgclass,
+			// And the award for "variable name most like Java source code" goes to...
+			addClassToNameAndTimestamp: data.msgclass
+		};
+	}
 	//4CC Team Colors
 	var teamClass = data.msg.match(/(Ð.+Ð)/gi);
 	if (teamClass){
@@ -2159,75 +2159,75 @@ function formatChatMessage(data, last) {
 
 	data.msg = data.msg.replace(/ <span style="display:none" class="teamColorSpan">.+/gi,"")
 
-    // Phase 1: Determine whether to show the username or not
-    var skip = data.username === last.name;
-    if(data.meta.addClass === "server-whisper")
-        skip = true;
-    // Prevent impersonation by abuse of the bold filter
-    if(data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
-        skip = false;
-    if (data.meta.forceShowName)
-        skip = false;
+	// Phase 1: Determine whether to show the username or not
+	var skip = data.username === last.name;
+	if(data.meta.addClass === "server-whisper")
+		skip = true;
+	// Prevent impersonation by abuse of the bold filter
+	if(data.msg.match(/^\s*<strong>\w+\s*:\s*<\/strong>\s*/))
+		skip = false;
+	if (data.meta.forceShowName)
+		skip = false;
 
-    data.msg = execEmotes(data.msg);
+	data.msg = execEmotes(data.msg);
 
-    last.name = data.username;
-    var div = $("<div/>");
-    /* drink is a special case because the entire container gets the class, not
+	last.name = data.username;
+	var div = $("<div/>");
+	/* drink is a special case because the entire container gets the class, not
        just the message */
-    if (data.meta.addClass === "drink") {
-        div.addClass("drink");
-        data.meta.addClass = "";
-    }
+	if (data.meta.addClass === "drink") {
+		div.addClass("drink");
+		data.meta.addClass = "";
+	}
 
-    // Add timestamps (unless disabled)
-    if (USEROPTS.show_timestamps) {
-        var time = $("<span/>").addClass("timestamp").appendTo(div);
-        var timestamp = new Date(data.time).toTimeString().split(" ")[0];
-        time.text("["+timestamp+"] ");
-        if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
-            time.addClass(data.meta.addClass);
-        }
-    }
+	// Add timestamps (unless disabled)
+	if (USEROPTS.show_timestamps) {
+		var time = $("<span/>").addClass("timestamp").appendTo(div);
+		var timestamp = new Date(data.time).toTimeString().split(" ")[0];
+		time.text("["+timestamp+"] ");
+		if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+			time.addClass(data.meta.addClass);
+		}
+	}
 
-    // Add username
-    var name = $("<span/>");
-    if (!skip) {
-        name.appendTo(div);
-    }
-    $("<strong/>").addClass("username " + teamClass).text(data.username + ": ").appendTo(name);
-    if (data.meta.modflair) {
-        name.addClass(getNameColor(data.meta.modflair));
-    }
-    if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
-        name.addClass(data.meta.addClass);
-    }
-    if (data.meta.superadminflair) {
-        name.addClass("label")
-            .addClass(data.meta.superadminflair.labelclass);
-        $("<span/>").addClass(data.meta.superadminflair.icon)
-            .addClass("glyphicon")
-            .css("margin-right", "3px")
-            .prependTo(name);
-    }
+	// Add username
+	var name = $("<span/>");
+	if (!skip) {
+		name.appendTo(div);
+	}
+	$("<strong/>").addClass("username " + teamClass).text(data.username + ": ").appendTo(name);
+	if (data.meta.modflair) {
+		name.addClass(getNameColor(data.meta.modflair));
+	}
+	if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
+		name.addClass(data.meta.addClass);
+	}
+	if (data.meta.superadminflair) {
+		name.addClass("label")
+			.addClass(data.meta.superadminflair.labelclass);
+		$("<span/>").addClass(data.meta.superadminflair.icon)
+			.addClass("glyphicon")
+			.css("margin-right", "3px")
+			.prependTo(name);
+	}
 
-    // Add the message itself
-    var message = $("<span/>").appendTo(div);
-    message[0].innerHTML = data.msg;
+	// Add the message itself
+	var message = $("<span/>").appendTo(div);
+	message[0].innerHTML = data.msg;
 
-    // For /me the username is part of the message
-    if (data.meta.action) {
-        name.remove();
-        message[0].innerHTML = data.username + " " + data.msg;
-    }
-    if (data.meta.addClass) {
-        message.addClass(data.meta.addClass);
-    }
-    if (data.meta.shadow) {
-        div.addClass("chat-shadow");
-    }
+	// For /me the username is part of the message
+	if (data.meta.action) {
+		name.remove();
+		message[0].innerHTML = data.username + " " + data.msg;
+	}
+	if (data.meta.addClass) {
+		message.addClass(data.meta.addClass);
+	}
+	if (data.meta.shadow) {
+		div.addClass("chat-shadow");
+	}
 
-    return div;
+	return div;
 }
 
 /*var VERTY = getOrDefault(CHANNEL.name + "_VERTY", false);
@@ -2245,7 +2245,7 @@ if (VERTY) {
 */
 
 setTimeout(function() {
-    $(".teamColorSpan").remove();
+	$(".teamColorSpan").remove();
 }, 2500);
 
 var REPLYNAME = "";
@@ -2256,7 +2256,7 @@ socket.on("pm", function(data) {
 		data2.msg += "<em> /r to reply</em>"
 		REPLYNAME = data.username;
 		data2.username = "From " + data2.username;
-    } else {
+	} else {
 		data2.username = "To " + data.to;
 	}
 	addChatMessage(data2);
@@ -2292,9 +2292,9 @@ var videoLimit = 600;
 
 setTimeout(function () {
 	if (videoLength === 0 && $("#currenttitle").text() !== "Nothing Playing") {
-        var splitTime = $(".queue_active .qe_time")[0].innerText.split(":")
-        videoLength = parseInt(splitTime[splitTime.length-1]) + parseInt(splitTime[splitTime.length-2]*60);
-    }
+		var splitTime = $(".queue_active .qe_time")[0].innerText.split(":")
+		videoLength = parseInt(splitTime[splitTime.length-1]) + parseInt(splitTime[splitTime.length-2]*60);
+	}
 }, 1500);
 
 setInterval(function() {
@@ -2310,13 +2310,13 @@ $("#chatline").on("paste", function() {
 	if (videoLength > videoLimit) {
 		stop++;
 		setOpt(CHANNEL.name + "_STOP", stop);
-        if (stop > stopLimit) {
-            setTimeout(function () {
-                $("#chatline")[0].value = "";
-                $("#chatline").attr("placeholder", CLIENT.name + " sure loves to fuck cans of spam.");
-            }, 1);
-        }
-    }
+		if (stop > stopLimit) {
+			setTimeout(function () {
+				$("#chatline")[0].value = "";
+				$("#chatline").attr("placeholder", CLIENT.name + " sure loves to fuck cans of spam.");
+			}, 1);
+		}
+	}
 });
 
 $("#chatline").keydown(function(ev) {
@@ -2330,24 +2330,24 @@ $("#chatline").keydown(function(ev) {
 					$("#chatline").attr("placeholder", CLIENT.name + " sure loves to fuck cans of spam.");
 				}, 1);
 			}
-        } else if (!ev.ctrlKey && ev.keyCode !== 86 && stop > 0) {
-            stop = stop - .1;
+		} else if (!ev.ctrlKey && ev.keyCode !== 86 && stop > 0) {
+			stop = stop - .1;
 			setOpt(CHANNEL.name + "_STOP", stop);
-            if (stop < 0) {
-                stop = 0;
-            } else if (stop < stopLimit) {
-                $("#chatline").attr("placeholder","");
-            }
-        }
-    }
+			if (stop < 0) {
+				stop = 0;
+			} else if (stop < stopLimit) {
+				$("#chatline").attr("placeholder","");
+			}
+		}
+	}
 
-    // Enter/return
-    if(ev.keyCode == 13) {
-        if (CHATTHROTTLE) {
-            return;
-        }
-        var msg = $("#chatline").val();
-        if(msg.trim()) {
+	// Enter/return
+	if(ev.keyCode == 13) {
+		if (CHATTHROTTLE) {
+			return;
+		}
+		var msg = $("#chatline").val();
+		if(msg.trim()) {
 			/*peakTimePercent = adPercent
 			if (CHANNEL.usercount/2000 > adPercent) {
 				peakTimePercent = CHANNEL.usercount/2000;
@@ -2356,18 +2356,18 @@ $("#chatline").keydown(function(ev) {
 				n = Math.floor(Math.random() * advertisements.length);
 				socket.emit("chatMsg", {msg:advertisements[n]});
 			}
-            var meta = {};
-            if (USEROPTS.adminhat && CLIENT.rank >= 255) {
-                msg = "/a " + msg;
-            } else if (USEROPTS.modhat && CLIENT.rank >= Rank.Moderator) {
-                meta.modflair = CLIENT.rank;
-            }
+			var meta = {};
+			if (USEROPTS.adminhat && CLIENT.rank >= 255) {
+				msg = "/a " + msg;
+			} else if (USEROPTS.modhat && CLIENT.rank >= Rank.Moderator) {
+				meta.modflair = CLIENT.rank;
+			}
 
-            // The /m command no longer exists, so emulate it clientside
-            if (CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
-                meta.modflair = CLIENT.rank;
-                msg = msg.substring(3);
-            }
+			// The /m command no longer exists, so emulate it clientside
+			if (CLIENT.rank >= 2 && msg.indexOf("/m ") === 0) {
+				meta.modflair = CLIENT.rank;
+				msg = msg.substring(3);
+			}
 
 			if (msg.indexOf("/r ") === 0) {
 				if (REPLYNAME === "") {
@@ -2397,42 +2397,42 @@ $("#chatline").keydown(function(ev) {
 					meta: meta
 				});
 			}
-            CHATHIST.push($("#chatline").val());
-            CHATHISTIDX = CHATHIST.length;
-            $("#chatline").val("");
-        }
-        return;
-    }
-    else if(ev.keyCode == 9) { // Tab completion
-        try {
-            chatTabComplete();
-        } catch (error) {
-            console.error(error);
-        }
-        ev.preventDefault();
-        return false;
-    }
-    else if(ev.keyCode == 38) { // Up arrow (input history)
-        if(CHATHISTIDX == CHATHIST.length) {
-            CHATHIST.push($("#chatline").val());
-        }
-        if(CHATHISTIDX > 0) {
-            CHATHISTIDX--;
-            $("#chatline").val(CHATHIST[CHATHISTIDX]);
-        }
+			CHATHIST.push($("#chatline").val());
+			CHATHISTIDX = CHATHIST.length;
+			$("#chatline").val("");
+		}
+		return;
+	}
+	else if(ev.keyCode == 9) { // Tab completion
+		try {
+			chatTabComplete();
+		} catch (error) {
+			console.error(error);
+		}
+		ev.preventDefault();
+		return false;
+	}
+	else if(ev.keyCode == 38) { // Up arrow (input history)
+		if(CHATHISTIDX == CHATHIST.length) {
+			CHATHIST.push($("#chatline").val());
+		}
+		if(CHATHISTIDX > 0) {
+			CHATHISTIDX--;
+			$("#chatline").val(CHATHIST[CHATHISTIDX]);
+		}
 
-        ev.preventDefault();
-        return false;
-    }
-    else if(ev.keyCode == 40) { // Down arrow (input history)
-        if(CHATHISTIDX < CHATHIST.length - 1) {
-            CHATHISTIDX++;
-            $("#chatline").val(CHATHIST[CHATHISTIDX]);
-        }
+		ev.preventDefault();
+		return false;
+	}
+	else if(ev.keyCode == 40) { // Down arrow (input history)
+		if(CHATHISTIDX < CHATHIST.length - 1) {
+			CHATHISTIDX++;
+			$("#chatline").val(CHATHIST[CHATHISTIDX]);
+		}
 
-        ev.preventDefault();
-        return false;
-    }
+		ev.preventDefault();
+		return false;
+	}
 });
 
 if (CLIENT.name === "Happy") {
@@ -2527,12 +2527,12 @@ if (CLIENT.name === "Happy") {
 					innerValue = row[j].toLocaleString();
 				};
 				var result = innerValue.replace(/"/g, '""');
-				if (result.search(/("|,|\n)/g) >= 0)
-					result = '"' + result + '"';
-				if (j > 0)
-					finalVal += ',';
-				finalVal += result;
-			}
+					if (result.search(/("|,|\n)/g) >= 0)
+						result = '"' + result + '"';
+						if (j > 0)
+						finalVal += ',';
+						finalVal += result;
+					}
 			return finalVal + '\n';
 		};
 
@@ -2572,20 +2572,20 @@ showbgbtn = $('<p id="showbg" class="navbar-text" title="Show background" style=
 				});
 			},50);
 		}
-});
+	});
 
 function addUsernameToPlaylist() {
-    var PLTimeList = Array.from(document.getElementsByClassName("qe_time")).forEach(function (PLCurrElement) {
-        if (PLCurrElement.getAttribute("class").indexOf("qe_userAdded") === -1) {
-            var qeuser = document.createElement("span");
-            qeuser.setAttribute("class","qe_user");
-            qeuser.textContent = PLCurrElement.parentElement.getAttribute("title").replace("Added by: ", "") + " | ";
-            qeuser.setAttribute("style","float:right;padding-right:3px;");
-            PLCurrElement.setAttribute("class", PLCurrElement.getAttribute("class") + " qe_userAdded");
+	var PLTimeList = Array.from(document.getElementsByClassName("qe_time")).forEach(function (PLCurrElement) {
+		if (PLCurrElement.getAttribute("class").indexOf("qe_userAdded") === -1) {
+			var qeuser = document.createElement("span");
+			qeuser.setAttribute("class","qe_user");
+			qeuser.textContent = PLCurrElement.parentElement.getAttribute("title").replace("Added by: ", "") + " | ";
+			qeuser.setAttribute("style","float:right;padding-right:3px;");
+			PLCurrElement.setAttribute("class", PLCurrElement.getAttribute("class") + " qe_userAdded");
 
-            PLCurrElement.parentElement.insertBefore(qeuser, PLCurrElement.nextSibling);
-        }
-    });
+			PLCurrElement.parentElement.insertBefore(qeuser, PLCurrElement.nextSibling);
+		}
+	});
 }
 addUsernameToPlaylist();
 
@@ -2623,448 +2623,639 @@ $("#mediaurl").on("paste", function() {
 
 $("#addfromurl, #searchcontrol, #customembed, #playlistmanager").css({"background-color":"#272B30 !important"})
 
-class CustomTextTriggers {
-  static init() {
-    if (CustomTextTriggers.has_init) {
-      return;
-    }
-    CustomTextTriggers.has_init = false;
-    CustomTextTriggers.snowflake_templates = ['❅', '❆'];
-    CustomTextTriggers.snowflake_animations = ['type1', 'type2', 'type3', 'type4'];
-    CustomTextTriggers.snow_levels = [
-      { spawn_rate: 250, spawn_limit: 10 },
-      { spawn_rate: 250, spawn_limit: 20 },
-      { spawn_rate: 150, spawn_limit: 20 },
-      { spawn_rate: 75, spawn_limit: 20 },
+class PresentsEffect {
+    static command = '/presents';
+    static shiz_img = 'https://cdn.discordapp.com/attachments/375406879553093633/659201454497595402/shiz_padoru2.png';
+    static presents_duration_s = 20;
+    static present_animations = ['type1', 'type2', 'type3', 'type4'];
+    static levels = [
+        { spawn_rate: 1000, spawn_limit: 6 },
+        { spawn_rate: 1000, spawn_limit: 10 },
     ];
-    CustomTextTriggers.max_erabe_time_limit_s = 20;
-		CustomTextTriggers.max_erabe_spawn_count = 15;
-		CustomTextTriggers.max_erabe_poll_options = 10;
 
-		CustomTextTriggers.padoru_images = [
-			// Yue
-			'https://cdn.discordapp.com/emojis/655099097237422130.png',
-			// Saber
-			'https://cdn.discordapp.com/emojis/519149153746550785.png',
-			// Chino
-			'https://cdn.discordapp.com/attachments/375406879553093633/659064801217085498/chino-padoru.png',
-			// Taiga
-			'https://cdn.discordapp.com/attachments/466273613092225046/659068018696912906/taiga-padoru.png',
-			// Miku
-			'https://cdn.discordapp.com/attachments/518340427506647042/659073537809711104/miku-padoru.png',
-			// Shizuru
-			'https://cdn.discordapp.com/attachments/375406879553093633/659201454497595402/shiz_padoru2.png',
-		];
-		CustomTextTriggers.padoru_levels = [
-      { spawn_rate: 1000, spawn_limit: 6 },
-      { spawn_rate: 1000, spawn_limit: 10 },
-      // { spawn_rate: 150, spawn_limit: 20 },
-      // { spawn_rate: 75, spawn_limit: 20 },
-		];
-		CustomTextTriggers.padoru_animations = ['type1', 'type2', 'type3', 'type4'];
-
-    // Maximum snowing time of 20 minutes
-    CustomTextTriggers.max_snow_time_limit_s = 1200;
-    CustomTextTriggers.max_padoru_time_limit_s = 1200;
-
-    CustomTextTriggers.state = {
-      snow: false,
-      erabe: false,
-      padoru: false,
-
-      snow_level_info: CustomTextTriggers.snow_levels[0],
-			snow_timeout: null,
-
-			padoru_level_info: CustomTextTriggers.padoru_levels[0],
-			padoru_timeout: null,
-
-			erabe_timeout: null,
-    };
-
-		CustomTextTriggers.snow_container = document.createElement('div');
-		CustomTextTriggers.erabe_container = document.createElement('div');
-		CustomTextTriggers.padoru_container = document.createElement('div');
-
-    document.documentElement.appendChild(CustomTextTriggers.snow_container);
-    document.documentElement.appendChild(CustomTextTriggers.erabe_container);
-    document.documentElement.appendChild(CustomTextTriggers.padoru_container);
-  }
-
-  static isMod(username) {
-    try {
-      let is_mod = false;
-      $("#userlist").find('span[class$=userlist_owner],span[class$=userlist_siteadmin]').each(function() {
-        if ($(this).text() === username) {
-          is_mod = true;
-          return false;
+    static versions = {
+        'normal': {
+            padoru: PresentsEffect.shiz_img,
+            img_bank: [
+                'https://cdn.discordapp.com/attachments/162409148909223936/781038166915547136/sample_64688cb11e7f37d58eca70a6709e4ceb.jpg',
+                'https://cdn.discordapp.com/attachments/162409148909223936/780983025059627089/Efr2CGlVAAAk5_X.png',
+                'https://cdn.discordapp.com/attachments/162409148909223936/780961390239678504/85881312_p0_master1200.jpg',
+                'https://cdn.discordapp.com/attachments/483446980605902848/781295276778323988/1363841058659.gif'
+            ]
+        },
+    }
+    ///////////////////////////////////////////
+    // "Public" Static methods
+    ///////////////////////////////////////////
+    static init() {
+        PresentsEffect.state = {
+            is_on: false,
+            timeout: null,
+            level: PresentsEffect.levels[0],
+            version: PresentsEffect.versions['normal'],
         }
-      });
-
-      return is_mod;
-    } catch (e) { return false; }
-	}
-
-	static isFirstMod() {
-		const first_mod_element = $("#userlist").find('span[class$=userlist_owner],span[class$=userlist_siteadmin]').first();
-		if (!first_mod_element) {
-			return false;
-		}
-
-		return first_mod_element.text() === CLIENT.name;
-	}
-
-  static addSnowElement(element) {
-    CustomTextTriggers.snow_container.appendChild(element);
-  }
-  static addErabeElement(element) {
-    CustomTextTriggers.erabe_container.appendChild(element);
-  }
-  static addPadoruElement(element) {
-    CustomTextTriggers.padoru_container.appendChild(element);
-  }
-
-  static randomElement(array) {
-    return array[Math.floor(Math.random() * array.length)];
-  }
-
-  static createSnowflake() {
-    if (!CustomTextTriggers.state.snow) {
-      return;
+        PresentsEffect.container = document.createElement('div');
+        document.documentElement.appendChild(PresentsEffect.container);
     }
 
-    const ascii = CustomTextTriggers.randomElement(CustomTextTriggers.snowflake_templates);
-    const animation_type = CustomTextTriggers.randomElement(CustomTextTriggers.snowflake_animations);
-    const random_percent = (Math.random() * 100).toFixed(4);
-
-    const outer = document.createElement('div');
-    outer.classList.add('c-effect__snowflake-outer');
-    outer.style.left = `${random_percent}%`;
-
-    const inner = document.createElement('div');
-    inner.classList.add('c-effect__snowflake');
-    inner.classList.add(animation_type);
-    inner.textContent = ascii;
-
-    outer.appendChild(inner);
-    CustomTextTriggers.addSnowElement(outer);
-    const fn = () => {
-      outer.parentElement.removeChild(outer);
-      outer.removeEventListener('animationend', fn);
-    };
-    outer.addEventListener('animationend', fn);
-  }
-
-	static createPadoru() {
-    if (!CustomTextTriggers.state.padoru) {
-      return;
+    static disable() {
+        PresentsEffect.state.is_on = false;
     }
 
-    const padoru_image = CustomTextTriggers.randomElement(CustomTextTriggers.padoru_images);
-    const animation_type = CustomTextTriggers.randomElement(CustomTextTriggers.padoru_animations);
-    const random_percent = (Math.random() * 100).toFixed(4);
-
-    const outer = document.createElement('div');
-		outer.classList.add('c-effect__padoru-outer');
-		outer.classList.add(animation_type);
-    outer.style.left = `${random_percent}%`;
-
-		const shake_container = document.createElement('div');
-    shake_container.classList.add('c-effect__padoru-shake');
-
-    const inner = document.createElement('img');
-    inner.classList.add('c-effect__padoru');
-    inner.src = padoru_image;
-
-		shake_container.appendChild(inner);
-    outer.appendChild(shake_container);
-    CustomTextTriggers.addPadoruElement(outer);
-    const fn = () => {
-      outer.parentElement.removeChild(outer);
-      outer.removeEventListener('animationend', fn);
-    };
-    outer.addEventListener('animationend', fn);
-  }
-
-  static createErabe() {
-    if (!CustomTextTriggers.state.erabe) {
-      return;
+    static addElement(element) {
+        PresentsEffect.container.appendChild(element);
     }
 
-    // Build the erabe element
-    const element = document.createElement('div');
-    element.classList.add('c-effect_erabe', 'js-effect-erabe');
-    element.textContent = 'erabe';
+    static handleCommand(message_parts, otherArgs) {
+        
+        // No parse, right now just one version
+        // TODO: add different H levels and loli options
 
-    // Randomizes the location of the erabe div
-    const randomizePosition = () => {
-      const [x, y] = CustomTextTriggers.getRandomErabePosition(
-          element.offsetWidth,
-          element.offsetHeight,
-          50);
+        // Disable presents after the timeout. If there is already one, reset the timer
+        if (PresentsEffect.state.timeout) {
+            clearTimeout(PresentsEffect.state.timeout);
+        }
+        PresentsEffect.state.timeout =
+            setTimeout(PresentsEffect.disable, PresentsEffect.presents_duration_s * 1000);
+        
+        // Only start the padoru animation if it is not already started
+        if (PresentsEffect.state.is_on) {
+            return;
+        }
+        PresentsEffect.state.is_on = true;
+        PresentsEffect._face_animation();
+        PresentsEffect._run_presents_animation();
+    }
+    ///////////////////////////////////////////
+    // Timed Static methods
+    ///////////////////////////////////////////
+    static _face_animation(){
+        if (!PresentsEffect.state.is_on) {
+            return;
+        }
+        const faceImg = PresentsEffect.state.version.padoru;
 
-      element.style.left = `${x}px`;
-      element.style.top = `${y}px`;
-    };
-    randomizePosition();
+        const faceEffect = document.createElement('img')
+        faceEffect.classList.add('c-effect__presents-face');
+        faceEffect.src = faceImg;
+        PresentsEffect.addElement(faceEffect);
 
-    const fn = () => {
-      if (!CustomTextTriggers.state.erabe) {
-        element.parentElement.removeChild(element);
-        element.removeEventListener('animationiteration', fn);
-        return;
-      }
-
-      randomizePosition();
-    };
-    element.addEventListener('animationiteration', fn);
-
-    CustomTextTriggers.addErabeElement(element);
-	}
-  static getRandomErabePosition(div_width, div_height, buffer) {
-    const width = window.innerWidth - div_width;
-    const height = window.innerHeight - div_height;
-
-    const random_x = Math.floor(Math.random() * width);
-    const random_y = Math.floor(Math.random() * height);
-    return [random_x, random_y];
-  }
-
-  /* Command handlers */
-  static handleChatMessage(msg_data) {
-    const is_shadowed = msg_data.username === CLIENT.name && msg_data.meta.shadow;
-    if (msg_data.username === "[server]" || is_shadowed) {
-      return;
+        const fn = () =>{
+            faceEffect.parentElement.removeChild(faceEffect);
+            faceEffect.removeEventListener('animationend', fn);
+        }
+        faceEffect.addEventListener('animationend', fn);
     }
 
-    if (!CustomTextTriggers.isMod(msg_data.username)) {
-      return;
-		}
+    static _run_presents_animation() {
+        const create_fn = (isLeft) => {
+            if (!PresentsEffect.state.is_on) {
+                return;
+            }
+            
+            PresentsEffect._create_present(isLeft);
+            setTimeout(create_fn.bind(null,!isLeft), PresentsEffect.state.level.spawn_rate);
+        };
+        setTimeout(create_fn.bind(null, true), PresentsEffect.state.level.spawn_rate);
+    }
+    static _create_present(isLeft){
+        if (!PresentsEffect.state.is_on) {
+            return;
+        }
+        
+        //const presentImg = PresentsEffect.shiz_img; // replace with random
+        const presentImg = CustomTextTriggers.randomElement(PresentsEffect.state.version.img_bank);
+        const animation = CustomTextTriggers.randomElement(PresentsEffect.present_animations);
+       
+        let offset = -500;
+        if (isLeft)     { offset = 10; }
+        else            { offset = 55; }
+        let random_location = (Math.random() * 35+ offset).toFixed(4);
+        
+        const inner = document.createElement('img')
+        inner.classList.add('c-effect__presents-present-fall-'.concat(animation));
+        //inner.classList.add(animation);
+        inner.style.left = `${random_location}%`; 
+        inner.src = presentImg;
+        PresentsEffect.addElement(inner);
+        
+        const fn = () => {
+            inner.parentElement.removeChild(inner);
+            inner.removeEventListener('animationend', fn);
+        };
+        inner.addEventListener('animationend', fn);
+    }
+}
+class PadoruEffect {
+    ///////////////////////////////////////////
+    // Static variables
+    ///////////////////////////////////////////
+    static command = '/padoru';
+    static animations = ['type1', 'type2', 'type3', 'type4'];
+    static max_padoru_time_limit_s = 1200;
+    static levels = [
+        { spawn_rate: 1000, spawn_limit: 6 },
+        { spawn_rate: 1000, spawn_limit: 10 },
+    ];
+    static images = [
+        // Yue
+        'https://cdn.discordapp.com/emojis/655099097237422130.png',
+        // Saber
+        'https://cdn.discordapp.com/emojis/519149153746550785.png',
+        // Chino
+        'https://cdn.discordapp.com/attachments/375406879553093633/659064801217085498/chino-padoru.png',
+        // Taiga
+        'https://cdn.discordapp.com/attachments/466273613092225046/659068018696912906/taiga-padoru.png',
+        // Miku
+        'https://cdn.discordapp.com/attachments/518340427506647042/659073537809711104/miku-padoru.png',
+        // Shizuru
+        'https://cdn.discordapp.com/attachments/375406879553093633/659201454497595402/shiz_padoru2.png',
+    ];
 
-		// If this client was the one who sent the message
-		const did_send_the_message = CLIENT.name === msg_data.username;
-
-    const message_parts = msg_data.msg.trim().replace(/\s\s+/igm, ' ').split(' ');
-    if (message_parts.length <= 0 || !message_parts[0] || message_parts[0][0] !== '/') {
-      return;
+    ///////////////////////////////////////////
+    // "Public" Static methods
+    ///////////////////////////////////////////
+    static init() {
+        PadoruEffect.state = {
+            is_on: false,
+            level_info: PadoruEffect.levels[0],
+            timeout: null,
+        };
+        PadoruEffect.container = document.createElement('div');
+        document.documentElement.appendChild(PadoruEffect.container);
     }
 
-    switch (message_parts[0]) {
-      case '/erabe': {
+    static disable() {
+        PadoruEffect.state.is_on = false;
+    }
+
+    static addElement(element) {
+        PadoruEffect.container.appendChild(element);
+    }
+
+    static handleCommand(message_parts, otherArgs) { // for compatibility
+
+        let [level, time_limit_s] = PadoruEffect.parseMessage(message_parts)
+
+        // Update the currently used snowing level
+        let level_index = level - 1;
+        if (level_index < 0 || level_index > PadoruEffect.levels.length) {
+            level_index = 0;
+        }
+        PadoruEffect.state.level_info = PadoruEffect.levels[level_index];
+
+        // Disable padoru after the timeout. If there is already one, reset the timer
+        if (PadoruEffect.state.timeout) {
+            clearTimeout(PadoruEffect.state.timeout);
+        }
+        PadoruEffect.state.timeout =
+            setTimeout(PadoruEffect.disable, time_limit_s * 1000);
+
+        // Only start the padoru animation if it is not already started
+        if (PadoruEffect.state.is_on) {
+            return;
+        }
+        PadoruEffect.state.is_on = true;
+        PadoruEffect._runAnimation();
+    }
+
+    static parseMessage (message_parts){
         if (message_parts[1] === 'off') {
-          CustomTextTriggers.disableErabe();
-          return;
+            PadoruEffect.disable();
+            return;
+        }
+
+        let level = parseInt(message_parts[1] || '1', 10);
+        if (isNaN(level) || level < 1) {
+            level = 1;
+        }
+
+        let time_limit_s = parseInt(message_parts[2] || '1200', 10);
+        if (isNaN(time_limit_s) || time_limit_s < 1) {
+            time_limit_s = 10;
+        } else if (time_limit_s > PadoruEffect.max_time_limit_s) {
+            time_limit_s = PadoruEffect.max_time_limit_s;
+        }
+        return [level, time_limit_s]
+    }
+
+    ///////////////////////////////////////////
+    // "Timer" Static methods
+    ///////////////////////////////////////////
+    static createPadoru() {
+        if (!PadoruEffect.state.is_on) {
+            return;
+        }
+
+        const padoru_image = CustomTextTriggers.randomElement(PadoruEffect.images);
+        const animation_type = CustomTextTriggers.randomElement(PadoruEffect.animations);
+        const random_percent = (Math.random() * 100).toFixed(4);
+
+        const outer = document.createElement('div');
+        outer.classList.add('c-effect__padoru-outer');
+        outer.classList.add(animation_type);
+        outer.style.left = `${random_percent}%`;
+
+        const shake_container = document.createElement('div');
+        shake_container.classList.add('c-effect__padoru-shake');
+
+        const inner = document.createElement('img');
+        inner.classList.add('c-effect__padoru');
+        inner.src = padoru_image;
+
+        shake_container.appendChild(inner);
+        outer.appendChild(shake_container);
+        PadoruEffect.addElement(outer);
+        const fn = () => {
+            outer.parentElement.removeChild(outer);
+            outer.removeEventListener('animationend', fn);
+        };
+        outer.addEventListener('animationend', fn);
+    }
+
+    static _runAnimation() {
+        const create_fn = () => {
+            if (!PadoruEffect.state.is_on) {
+                return;
+            }
+
+            const max_padoru = PadoruEffect.state.level_info.spawn_limit;
+            const total = Math.floor(1 + Math.random() * (max_padoru - 1));
+            for (let i = 0; i < total; i++) {
+                PadoruEffect.createPadoru();
+            }
+
+            setTimeout(create_fn, PadoruEffect.state.level_info.spawn_rate);
+        };
+        setTimeout(create_fn, PadoruEffect.state.level_info.spawn_rate);
+    }
+
+}
+
+class SnowEffect {
+    ///////////////////////////////////////////
+    // Static variables
+    ///////////////////////////////////////////
+    static command = '/snow';
+    static templates = ['❅', '❆'];
+    static animations = ['type1', 'type2', 'type3', 'type4'];
+    static levels = [
+        { spawn_rate: 250, spawn_limit: 10 },
+        { spawn_rate: 250, spawn_limit: 20 },
+        { spawn_rate: 150, spawn_limit: 20 },
+        { spawn_rate: 75, spawn_limit: 20 },
+    ];
+    static max_time_limit_s = 1200;
+
+    ///////////////////////////////////////////
+    // "Public" Static methods
+    ///////////////////////////////////////////
+    static init() {
+        SnowEffect.state = {
+            is_on: false,
+            level_info: SnowEffect.levels[0],
+            timeout: null,
+        }
+        SnowEffect.container = document.createElement('div');
+        document.documentElement.appendChild(SnowEffect.container);
+    }
+    static disable() {
+        SnowEffect.state.is_on = false;
+    }
+    static handleCommand(message_parts, otherArgs) { // other args is for compatability
+
+        let [level, time_limit_s] = SnowEffect.parseMessage(message_parts);
+
+        // Update the currently used snowing level
+        let level_index = level - 1;
+        if (level_index < 0 || level_index > SnowEffect.levels.length) {
+            level_index = 0;
+        }
+        SnowEffect.state.level_info = SnowEffect.levels[level_index];
+
+        // Disable snow after the timeout. If there is already one, reset the timer
+        if (SnowEffect.state.timeout) {
+            clearTimeout(SnowEffect.state.timeout);
+        }
+        SnowEffect.state.timeout =
+            setTimeout(SnowEffect.disable, time_limit_s * 1000);
+
+        // Only start the snow animation if it is not already started
+        if (SnowEffect.state.is_on) {
+            return;
+        }
+        SnowEffect.state.is_on = true;
+        SnowEffect._runAnimation();
+    }
+    static addElement(element) {
+        SnowEffect.container.appendChild(element);
+    }
+
+    static parseMessage(message_parts) {
+        if (message_parts[1] === 'off') {
+            SnowEffect.disable();
+            return;
+        }
+
+        let level = parseInt(message_parts[1] || '1', 10);
+        if (isNaN(level) || level < 1) {
+            level = 1;
+        }
+
+        let time_limit_s = parseInt(message_parts[2] || '1200', 10);
+        if (isNaN(time_limit_s) || time_limit_s < 1) {
+            time_limit_s = 10;
+        } else if (time_limit_s > SnowEffect.max_time_limit_s) {
+            time_limit_s = SnowEffect.max_time_limit_s;
+        }
+
+        return [level, time_limit_s];
+
+    }
+
+    ///////////////////////////////////////////
+    // "Timer" Static methods
+    ///////////////////////////////////////////
+    static createSnowflake() {
+        if (!SnowEffect.state.is_on) {
+            return;
+        }
+
+        const ascii = CustomTextTriggers.randomElement(SnowEffect.templates);
+        const animation_type = CustomTextTriggers.randomElement(SnowEffect.animations);
+        const random_percent = (Math.random() * 100).toFixed(4);
+
+        const outer = document.createElement('div');
+        outer.classList.add('c-effect__snowflake-outer');
+        outer.style.left = `${random_percent}%`;
+
+        const inner = document.createElement('div');
+        inner.classList.add('c-effect__snowflake');
+        inner.classList.add(animation_type);
+        inner.textContent = ascii;
+
+        outer.appendChild(inner);
+        SnowEffect.addElement(outer);
+        const fn = () => {
+            outer.parentElement.removeChild(outer);
+            outer.removeEventListener('animationend', fn);
+        };
+        outer.addEventListener('animationend', fn);
+    }
+
+    static _runAnimation() {
+        const create_fn = () => {
+            if (!SnowEffect.state.is_on) {
+                return;
+            }
+
+            const max_snowflakes = SnowEffect.state.level_info.spawn_limit;
+            const total = Math.floor(1 + Math.random() * (max_snowflakes - 1));
+            for (let i = 0; i < total; i++) {
+                SnowEffect.createSnowflake();
+            }
+
+            setTimeout(create_fn, SnowEffect.state.level_info.spawn_rate);
+        };
+        setTimeout(create_fn, SnowEffect.state.level_info.spawn_rate);
+    }
+}
+
+class ErabeEffect {
+
+    ///////////////////////////////////////////
+    // Static variables
+    /////////////////////////////////////////// 
+    static command = '/erabe';
+    static max_time_limit_s = 20;
+    static max_spawn_count = 15;
+    static max_poll_options = 10;
+
+    ///////////////////////////////////////////
+    // "Public" Static methods
+    ///////////////////////////////////////////
+    static init() {
+        ErabeEffect.state = {
+            is_on: false,
+            timeout: null,
+        }
+        ErabeEffect.container = document.createElement('div');
+        document.documentElement.appendChild(ErabeEffect.container);
+    };
+    static addElement(element) {
+        ErabeEffect.container.appendChild(element);
+    }
+    static handleCommand(message_parts, did_send_the_message){
+
+        let [spawn_count, time_limit_s, total_erabe_poll_options] =
+            ErabeEffect.parseMessage(message_parts);
+
+        if (ErabeEffect.is_on) {
+            return;
+        }
+        ErabeEffect.is_on = true;
+
+        if (did_send_the_message) {
+            try {
+                const options = [];
+                for (let i = 1; i <= total_erabe_poll_options; i++) {
+                    options.push(i.toString());
+                }
+
+                socket.emit('newPoll', {
+                    title:"ERABE",
+                    opts: options,
+                    obscured:false,
+                });
+            } catch (e) {}
+        }
+
+        for (let i = 0; i < spawn_count; i++) {
+            ErabeEffect.createErabe();
+        }
+
+        // Remove all erabes after the timeout
+        if (ErabeEffect.state.timeout) {
+            clearTimeout(ErabeEffect.state.timeout);
+        }
+        ErabeEffect.state.timeout =
+            setTimeout(ErabeEffect.disable, time_limit_s * 1000);
+    }
+    static disable() {
+        ErabeEffect.is_on = false;
+        if (ErabeEffect.state.timeout) {
+            clearTimeout(ErabeEffect.state.timeout);
+        }
+
+        ErabeEffect.state.timeout = null;
+    }
+
+    ///////////////////////////////////////////
+    // "Private" Static methods
+    ///////////////////////////////////////////
+    static parseMessage(message_parts) {
+        if (message_parts[1] === 'off') {
+            CustomTextTriggers.disableErabe();
+            return;
         }
 
         let spawn_count = parseInt(message_parts[1] || '2', 10);
         if (isNaN(spawn_count) || spawn_count < 1) {
-          spawn_count = 2;
-        } else if (spawn_count > CustomTextTriggers.max_erabe_spawn_count) {
-          spawn_count = CustomTextTriggers.max_erabe_spawn_count;
+            spawn_count = 2;
+        } else if (spawn_count > ErabeEffect.max_spawn_count) {
+            spawn_count = ErabeEffect.max_spawn_count;
         }
 
         let time_limit_s = parseInt(message_parts[2] || '10', 10);
         if (isNaN(time_limit_s) || time_limit_s < 1) {
-          time_limit_s = 10;
-				} else if (time_limit_s > CustomTextTriggers.max_erabe_time_limit_s) {
-          time_limit_s = CustomTextTriggers.max_erabe_time_limit_s;
+            time_limit_s = 10;
+        } else if (time_limit_s > ErabeEffect.max_time_limit_s) {
+            time_limit_s = ErabeEffect.max_time_limit_s;
         }
 
-				let total_erabe_poll_options = parseInt(message_parts[3] || '2', 10);
-				if (isNaN(total_erabe_poll_options) || total_erabe_poll_options < 1) {
-					total_erabe_poll_options = 2;
-				} else if (total_erabe_poll_options > CustomTextTriggers.max_erabe_poll_options) {
-					total_erabe_poll_options = CustomTextTriggers.max_erabe_poll_options;
-				}
-
-        CustomTextTriggers.handleCommandErabe(
-						did_send_the_message,
-						spawn_count,
-						time_limit_s,
-						total_erabe_poll_options);
-        break;
-      }
-      case '/snow': {
-        if (message_parts[1] === 'off') {
-          CustomTextTriggers.disableSnow();
-          return;
+        let total_erabe_poll_options = parseInt(message_parts[3] || '2', 10);
+        if (isNaN(total_erabe_poll_options) || total_erabe_poll_options < 1) {
+            total_erabe_poll_options = 2;
+        } else if (total_erabe_poll_options > ErabeEffect.max_poll_options) {
+            total_erabe_poll_options = ErabeEffect.max_poll_options;
+        }
+        return [spawn_count, time_limit_s, total_erabe_poll_options];
+    }
+    static createErabe() {
+        if (!ErabeEffect.is_on) {
+            return;
         }
 
-        let level = parseInt(message_parts[1] || '1', 10);
-        if (isNaN(level) || level < 1) {
-          level = 1;
-        }
+        // Build the erabe element
+        const element = document.createElement('div');
+        element.classList.add('c-effect_erabe', 'js-effect-erabe');
+        element.textContent = 'erabe';
 
-        let time_limit_s = parseInt(message_parts[2] || '1200', 10);
-        if (isNaN(time_limit_s) || time_limit_s < 1) {
-          time_limit_s = 10;
-        } else if (time_limit_s > CustomTextTriggers.max_snow_time_limit_s) {
-          time_limit_s = CustomTextTriggers.max_snow_time_limit_s;
-        }
+        // Randomizes the location of the erabe div
+        const randomizePosition = () => {
+            const [x, y] = ErabeEffect.getRandomErabePosition(
+                element.offsetWidth,
+                element.offsetHeight,
+                50);
 
-        CustomTextTriggers.handleCommandSnow(level, time_limit_s);
-        break;
-			}
-			case '/padoru': {
-        if (message_parts[1] === 'off') {
-          CustomTextTriggers.disablePadoru();
-          return;
-        }
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+        };
+        randomizePosition();
 
-        let level = parseInt(message_parts[1] || '1', 10);
-        if (isNaN(level) || level < 1) {
-          level = 1;
-        }
+        const fn = () => {
+            if (!ErabeEffect.is_on) {
+                element.parentElement.removeChild(element);
+                element.removeEventListener('animationiteration', fn);
+                return;
+            }
 
-        let time_limit_s = parseInt(message_parts[2] || '1200', 10);
-        if (isNaN(time_limit_s) || time_limit_s < 1) {
-          time_limit_s = 10;
-        } else if (time_limit_s > CustomTextTriggers.max_padoru_time_limit_s) {
-          time_limit_s = CustomTextTriggers.max_padoru_time_limit_s;
-        }
+            randomizePosition();
+        };
+        element.addEventListener('animationiteration', fn);
 
-        CustomTextTriggers.handleCommandPadoru(level, time_limit_s);
-        break;
-      }
-      case '/effects_off':
-        CustomTextTriggers.disableErabe();
-				CustomTextTriggers.disableSnow();
-				CustomTextTriggers.disablePadoru();
-        break;
+        ErabeEffect.addElement(element);
     }
-  }
+    static getRandomErabePosition(div_width, div_height, buffer) {
+        const width = window.innerWidth - div_width;
+        const height = window.innerHeight - div_height;
 
-  static handleCommandErabe(
-			did_send_the_message,
-			spawn_count,
-			time_limit_s = 10,
-			total_erabe_poll_options = 2) {
-    if (CustomTextTriggers.state.erabe) {
-      return;
-    }
-    CustomTextTriggers.state.erabe = true;
-
-		if (did_send_the_message) {
-			try {
-				const options = [];
-				for (let i = 1; i <= total_erabe_poll_options; i++) {
-					options.push(i.toString());
-				}
-
-				socket.emit('newPoll', {
-					title:"ERABE",
-					opts: options,
-					obscured:false,
-				});
-			} catch (e) {}
-		}
-
-    for (let i = 0; i < spawn_count; i++) {
-      CustomTextTriggers.createErabe();
+        const random_x = Math.floor(Math.random() * width);
+        const random_y = Math.floor(Math.random() * height);
+        return [random_x, random_y];
     }
 
-		// Remove all erabes after the timeout
-		if (CustomTextTriggers.state.erabe_timeout) {
-			clearTimeout(CustomTextTriggers.state.erabe_timeout);
-		}
-		CustomTextTriggers.state.erabe_timeout =
-				setTimeout(CustomTextTriggers.disableErabe, time_limit_s * 1000);
-  }
-  static disableErabe() {
-		CustomTextTriggers.state.erabe = false;
-		if (CustomTextTriggers.state.erabe_timeout) {
-			clearTimeout(CustomTextTriggers.state.erabe_timeout);
-		}
-
-		CustomTextTriggers.state.erabe_timeout = null;
-  }
-
-  static handleCommandSnow(level = 1, time_limit_s = 1200) {
-    // Update the currently used snowing level
-    let level_index = level - 1;
-    if (level_index < 0 || level_index > CustomTextTriggers.snow_levels.length) {
-      level_index = 0;
-    }
-    CustomTextTriggers.state.snow_level_info = CustomTextTriggers.snow_levels[level_index];
-
-    // Disable snow after the timeout. If there is already one, reset the timer
-    if (CustomTextTriggers.state.snow_timeout) {
-      clearTimeout(CustomTextTriggers.state.snow_timeout);
-    }
-    CustomTextTriggers.state.snow_timeout =
-        setTimeout(CustomTextTriggers.disableSnow, time_limit_s * 1000);
-
-    // Only start the snow animation if it is not already started
-    if (CustomTextTriggers.state.snow) {
-      return;
-    }
-    CustomTextTriggers.state.snow = true;
-    CustomTextTriggers._runSnowAnimation();
-  }
-  static _runSnowAnimation() {
-    const create_fn = () => {
-      if (!CustomTextTriggers.state.snow) {
-        return;
-      }
-
-      const max_snowflakes = CustomTextTriggers.state.snow_level_info.spawn_limit;
-      const total = Math.floor(1 + Math.random() * (max_snowflakes - 1));
-      for (let i = 0; i < total; i++) {
-        CustomTextTriggers.createSnowflake();
-      }
-
-      setTimeout(create_fn, CustomTextTriggers.state.snow_level_info.spawn_rate);
-    };
-    setTimeout(create_fn, CustomTextTriggers.state.snow_level_info.spawn_rate);
-  }
-  static disableSnow() {
-    CustomTextTriggers.state.snow = false;
-	}
-
-	/* -------------------------------------------------------------------------- */
-	/*                            Padoru effect handler                           */
-	/* -------------------------------------------------------------------------- */
-	static handleCommandPadoru(level = 1, time_limit_s = 1200) {
-    // Update the currently used snowing level
-    let level_index = level - 1;
-    if (level_index < 0 || level_index > CustomTextTriggers.padoru_levels.length) {
-      level_index = 0;
-    }
-    CustomTextTriggers.state.padoru_level_info = CustomTextTriggers.padoru_levels[level_index];
-
-    // Disable padoru after the timeout. If there is already one, reset the timer
-    if (CustomTextTriggers.state.padoru_timeout) {
-      clearTimeout(CustomTextTriggers.state.padoru_timeout);
-    }
-    CustomTextTriggers.state.padoru_timeout =
-        setTimeout(CustomTextTriggers.disablePadoru, time_limit_s * 1000);
-
-    // Only start the padoru animation if it is not already started
-    if (CustomTextTriggers.state.padoru) {
-      return;
-    }
-    CustomTextTriggers.state.padoru = true;
-    CustomTextTriggers._runPadoruAnimation();
-  }
-  static _runPadoruAnimation() {
-    const create_fn = () => {
-      if (!CustomTextTriggers.state.padoru) {
-        return;
-      }
-
-      const max_padoru = CustomTextTriggers.state.padoru_level_info.spawn_limit;
-      const total = Math.floor(1 + Math.random() * (max_padoru - 1));
-      for (let i = 0; i < total; i++) {
-        CustomTextTriggers.createPadoru();
-      }
-
-      setTimeout(create_fn, CustomTextTriggers.state.padoru_level_info.spawn_rate);
-    };
-    setTimeout(create_fn, CustomTextTriggers.state.padoru_level_info.spawn_rate);
-  }
-  static disablePadoru() {
-    CustomTextTriggers.state.padoru = false;
-  }
 }
+class CustomTextTriggers {
+
+    // Only place you need to add a new effect to make it work
+    static effects = [ErabeEffect, SnowEffect, PadoruEffect, PresentsEffect];
+
+    static init() {
+        if (CustomTextTriggers.has_init) {
+            return;
+        }
+        CustomTextTriggers.has_init = false;
+
+        // Setup the effect lookup
+        CustomTextTriggers.effect_lookup = {};
+        for (let effectCls of CustomTextTriggers.effects) {
+            effectCls.init();
+            CustomTextTriggers.effect_lookup[effectCls.command] = {effect: effectCls, handle: effectCls.handleCommand};
+        }
+
+        // Add non-effect commands here
+        CustomTextTriggers.effect_lookup['/effects_off'] = {effect: null, handle: CustomTextTriggers.disableEffects};
+
+        // testing
+        CustomTextTriggers.effect_lookup['/presents'].handle('', []);
+        //CustomTextTriggers.effect_lookup['/padoru'].handle('', []);
+
+    }
+
+    static isMod(username) {
+        try {
+            let is_mod = false;
+            $("#userlist").find('span[class$=userlist_owner],span[class$=userlist_siteadmin]').each(function() {
+                if ($(this).text() === username) {
+                    is_mod = true;
+                    return false;
+                }
+            });
+
+            return is_mod;
+        } catch (e) { return false; }
+    }
+
+    static isFirstMod() {
+        const first_mod_element = $("#userlist").find('span[class$=userlist_owner],span[class$=userlist_siteadmin]').first();
+        if (!first_mod_element) {
+            return false;
+        }
+
+        return first_mod_element.text() === CLIENT.name;
+    }
+
+    static randomElement(array) {
+        return array[Math.floor(Math.random() * array.length)];
+    }
+
+    /* Command handlers */
+    static handleChatMessage(msg_data) {
+        const is_shadowed = msg_data.username === CLIENT.name && msg_data.meta.shadow;
+        if (msg_data.username === "[server]" || is_shadowed) {
+            return;
+        }
+
+        if (!CustomTextTriggers.isMod(msg_data.username)) {
+            return;
+        }
+
+        // If this client was the one who sent the message
+        const did_send_the_message = CLIENT.name === msg_data.username;
+
+        const message_parts = msg_data.msg.trim().replace(/\s\s+/igm, ' ').split(' ');
+        if (message_parts.length <= 0 || !message_parts[0] || message_parts[0][0] !== '/') {
+            return;
+        }
+
+        // Do the command if it exists
+        try {
+            CustomTextTriggers.effect_lookup[message_parts[0]].handle(message_parts, [did_send_the_message]);
+        } catch (e) {}
+    }
+
+    static disableEffects() {
+        for (let effect in CustomTextTriggers.effect_lookup) {
+            try {
+                CustomTextTriggers.effect_lookup[effect].disable();
+            } catch (e) {}
+        }
+    }
+
+}
+
+
 CustomTextTriggers.init();
 
 // This is what turns the whole thing on to be run by chat messages like /erabe
